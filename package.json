@@ -1,8 +1,9 @@
 {
+  "type": "module",
   "name": "sql-challenge-employee-tracker",
   "version": "1.0.0",
-  "description": "Module 12 Challenge SQL Challenge: Employee Tracker",
-  "main": "index.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "inquirer": "^9.2.8",
     "mysql2": "^3.5.2"
   }
