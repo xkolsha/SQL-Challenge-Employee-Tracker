@@ -102,3 +102,49 @@ async function addRole() {
     .query(query, [answer.title, answer.salary, answer.department_id]);
   await mainMenu();
 }
+
+async function viewEmployees() {
+  const query = "SELECT * FROM employee";
+  const [rows] = await connection.promise().query(query);
+  console.table(rows);
+  await mainMenu();
+}
+
+async function addEmployee() {
+  const answer = await inquirer.prompt([
+    {
+      name: "first_name",
+      type: "input",
+      message: "What is the first name of the employee?",
+    },
+    {
+      name: "last_name",
+      type: "input",
+      message: "What is the last name of the employee?",
+    },
+    {
+      name: "role_id",
+      type: "input",
+      message: "What is the role ID of the employee?",
+    },
+    {
+      name: "manager_id",
+      type: "input",
+      message: "What is the manager ID of the employee?",
+    },
+  ]);
+
+  const query =
+    "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)";
+  await connection
+    .promise()
+    .query(query, [
+      answer.first_name,
+      answer.last_name,
+      answer.role_id,
+      answer.manager_id,
+    ]);
+  await mainMenu();
+}
+
+mainMenu();
