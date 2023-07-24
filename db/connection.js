@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
   if (err) throw err;
-  console.log(chalk.green("Connected!"));
+  console.log(chalk.bgGreen("Connected!"));
 });
 
 export default connection;

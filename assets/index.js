@@ -68,3 +68,10 @@ async function addDepartment() {
   await connection.promise().query(query, answer.name);
   await mainMenu();
 }
+
+async function viewRoles() {
+  const query = "SELECT * FROM role";
+  const [rows] = await connection.promise().query(query);
+  console.table(rows);
+  await mainMenu();
+}
