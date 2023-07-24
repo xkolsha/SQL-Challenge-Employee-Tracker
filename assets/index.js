@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import connection from "../db/connection.";
+import connection from "../db/connection.js";
 import chalk from "chalk";
 
 async function mainMenu() {
