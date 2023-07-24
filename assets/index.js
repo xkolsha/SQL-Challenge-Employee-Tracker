@@ -147,4 +147,25 @@ async function addEmployee() {
   await mainMenu();
 }
 
+async function updateEmployeeRole() {
+  const answer = await inquirer.prompt([
+    {
+      name: "employee_id",
+      type: "input",
+      message: "What is the ID of the employee whose role you want to update?",
+      validate: (value) => (!isNaN(value) ? true : "Please enter a number"),
+    },
+    {
+      name: "role_id",
+      type: "input",
+      message: "What is the new role ID for the employee?",
+      validate: (value) => (!isNaN(value) ? true : "Please enter a number"),
+    },
+  ]);
+
+  const query = "UPDATE employee SET role_id = ? WHERE id = ?";
+  await connection.promise().query(query, [answer.role_id, answer.employee_id]);
+  await mainMenu();
+}
+
 mainMenu();
