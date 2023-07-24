@@ -130,23 +130,49 @@ async function addEmployee() {
     {
       name: "manager_id",
       type: "input",
-      message: "What is the manager ID of the employee?",
+      message:
+        "What is the manager ID of the employee? Enter 0 if the employee has no manager.",
     },
   ]);
 
+  // Check if the role exists in the database
+  const roleQuery = "SELECT * FROM role WHERE id = ?";
+  const [roleRows] = await connection
+    .promise()
+    .query(roleQuery, answer.role_id);
+
+  if (roleRows.length === 0) {
+    console.log(chalk.red(`Role with ID ${answer.role_id} does not exist.`));
+    await mainMenu();
+    return;
+  }
+
+  // Check if the manager exists in the database, unless the manager_id is 0
+  if (answer.manager_id !== "0") {
+    const managerQuery = "SELECT * FROM employee WHERE id = ?";
+    const [managerRows] = await connection
+      .promise()
+      .query(managerQuery, answer.manager_id);
+
+    if (managerRows.length === 0) {
+      console.log(
+        chalk.red(`Manager with ID ${answer.manager_id} does not exist.`)
+      );
+      await mainMenu();
+      return;
+    }
+  }
+
   const query =
     "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)";
-  await connection
-    .promise()
-    .query(query, [
-      answer.first_name,
-      answer.last_name,
-      answer.role_id,
-      answer.manager_id,
-    ]);
+  await connection.promise().query(query, [
+    answer.first_name,
+    answer.last_name,
+    answer.role_id,
+    answer.manager_id === "0" ? null : answer.manager_id, // If manager_id is 0, insert NULL
+  ]);
   await mainMenu();
 }
-
 async function updateEmployeeRole() {
   const answer = await inquirer.prompt([
     {
