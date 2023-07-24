@@ -49,3 +49,22 @@ async function mainMenu() {
       break;
   }
 }
+
+async function viewDepartments() {
+  const query = "SELECT * FROM department";
+  const [rows] = await connection.promise().query(query);
+  console.table(rows);
+  await mainMenu();
+}
+
+async function addDepartment() {
+  const answer = await inquirer.prompt({
+    name: "name",
+    type: "input",
+    message: "What is the name of the department?",
+  });
+
+  const query = "INSERT INTO department (name) VALUES (?)";
+  await connection.promise().query(query, answer.name);
+  await mainMenu();
+}
