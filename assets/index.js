@@ -75,3 +75,30 @@ async function viewRoles() {
   console.table(rows);
   await mainMenu();
 }
+
+async function addRole() {
+  const answer = await inquirer.prompt([
+    {
+      name: "title",
+      type: "input",
+      message: "What is the title of the role?",
+    },
+    {
+      name: "salary",
+      type: "input",
+      message: "What is the salary of the role?",
+    },
+    {
+      name: "department_id",
+      type: "input",
+      message: "What is the department ID of the role?",
+    },
+  ]);
+
+  const query =
+    "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)";
+  await connection
+    .promise()
+    .query(query, [answer.title, answer.salary, answer.department_id]);
+  await mainMenu();
+}
