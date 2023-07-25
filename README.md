@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a command-line application that provides an interactive interface for managing a company's employee database. The motivation behind this project was to create a tool that makes it easy for non-technical users to view and interact with information stored in a database. The application solves the problem of navigating through complex database structures, making it simple and intuitive to manage a company's departments, roles, and employees. During the development of this project, we learned how to build command-line applications using Node.js, interact with a MySQL database, and implement user interfaces with Inquirer.js.
+This is a command-line application that provides an interactive interface for managing a company's employee database. The motivation behind this project was to create a tool that makes it easy for non-technical users to view and interact with information stored in a database. The application solves the problem of navigating through complex database structures, making it simple and intuitive to manage a company's departments, roles, and employees.
 
 ## Table of Contents
 
@@ -13,7 +13,6 @@ This is a command-line application that provides an interactive interface for ma
 - [Usage](#usage)
 - [Features](#features)
 - [Mock Up](#mock-up)
-- [Deployed Application](#deployed-application)
 - [Credits](#credits)
 - [License](#license)
 - [Badges](#badges)
